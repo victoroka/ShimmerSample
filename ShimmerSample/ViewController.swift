@@ -16,8 +16,16 @@ final class ViewController: UIViewController {
         self.view = screen
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setNeedsStatusBarAppearanceUpdate()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .darkContent
+    }
 }

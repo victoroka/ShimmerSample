@@ -10,6 +10,14 @@ import UIKit
 
 final class ViewControllerScreen: UIView {
     
+    // MARK: - Screen Components
+    private var maskingViews = [UIView]()
+    
+    private var skeletonView: SkeletonView = {
+        let view = SkeletonView(frame: .zero)
+        return view
+    }()
+    
     private lazy var cardView: UIView = {
         let card = UIView(frame: .zero)
         card.layer.cornerRadius = 14.0
@@ -38,18 +46,24 @@ final class ViewControllerScreen: UIView {
     
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
+        label.textColor = .black
+        label.font = UIFont(name: "Avenir-Black", size: 17)
         label.alpha = 0.0
         return label
     }()
     
     private lazy var jobTitleLabel: UILabel = {
         let label = UILabel()
+        label.textColor = .black
+        label.font = UIFont(name: "Avenir-Medium", size: 15)
         label.alpha = 0.0
         return label
     }()
     
     private lazy var locationLabel: UILabel = {
         let label = UILabel()
+        label.textColor = .black
+        label.font = UIFont(name: "Avenir-Medium", size: 15)
         label.alpha = 0.0
         return label
     }()
@@ -78,38 +92,77 @@ final class ViewControllerScreen: UIView {
     override init(frame: CGRect = .zero) {
         super.init(frame: frame)
         setupView()
+        
+        layoutIfNeeded()
+        maskingViews.append(nameLabelMask)
+        maskingViews.append(jobTitleLabelMask)
+        maskingViews.append(locationLabelMask)
+        maskingViews.append(profileImageViewPlaceholder)
+        skeletonView.setMaskingViews(for: maskingViews)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Button Action
     @objc func loadProfile(sender: UIButton!) {
-        print("loading...")
+        skeletonView.startAnimating()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+            self.nameLabel.text = "Victor Hideo Oka"
+            self.jobTitleLabel.text = "iOS Developer"
+            self.locationLabel.text = "São Paulo - Brazil"
+            self.skeletonView.stopAnimating()
+            self.skeletonView.layer.mask = nil
+            
+            UIView.animate(withDuration: 0.5, animations: {
+                self.nameLabel.alpha = 1.0
+                self.jobTitleLabel.alpha = 1.0
+                self.locationLabel.alpha = 1.0
+                self.profileImageView.image = UIImage(named: "itachi.jpg")
+            })
+        }
     }
 }
 
+// MARK: - Code View Protocol
 extension ViewControllerScreen: CodeView {
     
     func buildViewHierarchy() {
-        cardView.addSubview(profileImageViewPlaceholder)
-        cardView.addSubview(nameLabelMask)
-        cardView.addSubview(jobTitleLabelMask)
-        cardView.addSubview(locationLabelMask)
-        cardView.addSubview(nameLabel)
-        cardView.addSubview(jobTitleLabel)
-        cardView.addSubview(locationLabel)
+        skeletonView.addSubview(nameLabelMask)
+        skeletonView.addSubview(jobTitleLabelMask)
+        skeletonView.addSubview(locationLabelMask)
+        skeletonView.addSubview(profileImageViewPlaceholder)
+        
+        skeletonView.addSubview(nameLabel)
+        skeletonView.addSubview(jobTitleLabel)
+        skeletonView.addSubview(locationLabel)
+        skeletonView.addSubview(profileImageView)
+        
+        cardView.addSubview(skeletonView)
         addSubview(cardView)
         addSubview(fetchButton)
     }
     
     func setupConstraints() {
         cardView.snp.makeConstraints { (make) in
-            make.top.equalTo(safeAreaLayoutGuide.snp.topMargin).inset(20)
+            make.top.equalTo(safeAreaLayoutGuide.snp.topMargin).inset(40)
             make.left.equalToSuperview().offset(20)
             make.right.equalToSuperview().inset(20)
             make.height.equalTo(150)
             make.centerX.equalToSuperview()
+        }
+        
+        skeletonView.snp.makeConstraints { (make) in
+            make.top.bottom.left.right.equalToSuperview()
+            make.height.equalToSuperview()
+        }
+        
+        profileImageView.snp.makeConstraints { (make) in
+            make.left.equalToSuperview().offset(15)
+            make.height.equalTo(80)
+            make.width.equalTo(80)
+            make.centerY.equalToSuperview()
         }
         
         profileImageViewPlaceholder.snp.makeConstraints { (make) in
@@ -121,7 +174,7 @@ extension ViewControllerScreen: CodeView {
         
         nameLabel.snp.makeConstraints { (make) in
             make.top.equalTo(profileImageViewPlaceholder.snp.top)
-            make.left.equalTo(profileImageViewPlaceholder.snp.right).offset(8)
+            make.left.equalTo(profileImageViewPlaceholder.snp.right).offset(12)
             make.right.equalToSuperview().inset(8)
             make.height.equalTo(20)
         }
@@ -135,7 +188,7 @@ extension ViewControllerScreen: CodeView {
         
         jobTitleLabel.snp.makeConstraints { (make) in
             make.top.equalTo(nameLabel.snp.bottom).offset(10)
-            make.left.equalTo(profileImageViewPlaceholder.snp.right).offset(8)
+            make.left.equalTo(profileImageView.snp.right).offset(12)
             make.right.equalToSuperview().inset(8)
             make.height.equalTo(20)
         }
@@ -143,13 +196,13 @@ extension ViewControllerScreen: CodeView {
         jobTitleLabelMask.snp.makeConstraints { (make) in
             make.centerY.equalTo(jobTitleLabel.snp.centerY)
             make.left.equalTo(jobTitleLabel.snp.left)
-            make.width.equalTo(160)
+            make.width.equalTo(215)
             make.height.equalTo(15)
         }
         
         locationLabel.snp.makeConstraints { (make) in
             make.top.equalTo(jobTitleLabel.snp.bottom).offset(10)
-            make.left.equalTo(profileImageViewPlaceholder.snp.right).offset(8)
+            make.left.equalTo(profileImageView.snp.right).offset(12)
             make.right.equalToSuperview().inset(8)
             make.height.equalTo(20)
         }
@@ -157,7 +210,7 @@ extension ViewControllerScreen: CodeView {
         locationLabelMask.snp.makeConstraints { (make) in
             make.centerY.equalTo(locationLabel.snp.centerY)
             make.left.equalTo(locationLabel.snp.left)
-            make.width.equalTo(160)
+            make.width.equalTo(175)
             make.height.equalTo(15)
         }
         
@@ -172,10 +225,6 @@ extension ViewControllerScreen: CodeView {
     
     func setupAdditionalConfigurarion() {
         backgroundColor = .white
-        nameLabelMask.backgroundColor = .lightGray
-        jobTitleLabelMask.backgroundColor = .lightGray
-        locationLabelMask.backgroundColor = .lightGray
-        profileImageViewPlaceholder.backgroundColor = .lightGray
     }
     
 }

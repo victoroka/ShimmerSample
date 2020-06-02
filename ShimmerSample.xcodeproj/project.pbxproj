@@ -16,6 +16,8 @@
 		84C183072486D8EE0048F800 /* SnapKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 84C183052486D8EE0048F800 /* SnapKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		84C1830B2486DA590048F800 /* CodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C1830A2486DA590048F800 /* CodeView.swift */; };
 		84C1830D2486DA8D0048F800 /* ViewControllerScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C1830C2486DA8D0048F800 /* ViewControllerScreen.swift */; };
+		84C1830F2486F0E40048F800 /* SkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C1830E2486F0E40048F800 /* SkeletonView.swift */; };
+		84C183112486F11A0048F800 /* UIViewMasking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C183102486F11A0048F800 /* UIViewMasking.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -43,6 +45,8 @@
 		84C183052486D8EE0048F800 /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
 		84C1830A2486DA590048F800 /* CodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeView.swift; sourceTree = "<group>"; };
 		84C1830C2486DA8D0048F800 /* ViewControllerScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerScreen.swift; sourceTree = "<group>"; };
+		84C1830E2486F0E40048F800 /* SkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonView.swift; sourceTree = "<group>"; };
+		84C183102486F11A0048F800 /* UIViewMasking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewMasking.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +89,8 @@
 				84C182FE2486CF8D0048F800 /* Info.plist */,
 				84C1830A2486DA590048F800 /* CodeView.swift */,
 				84C1830C2486DA8D0048F800 /* ViewControllerScreen.swift */,
+				84C1830E2486F0E40048F800 /* SkeletonView.swift */,
+				84C183102486F11A0048F800 /* UIViewMasking.swift */,
 			);
 			path = ShimmerSample;
 			sourceTree = "<group>";
@@ -193,8 +199,10 @@
 				84C1830D2486DA8D0048F800 /* ViewControllerScreen.swift in Sources */,
 				84C182F52486CF8B0048F800 /* ViewController.swift in Sources */,
 				84C182F12486CF8B0048F800 /* AppDelegate.swift in Sources */,
+				84C183112486F11A0048F800 /* UIViewMasking.swift in Sources */,
 				84C182F32486CF8B0048F800 /* SceneDelegate.swift in Sources */,
 				84C1830B2486DA590048F800 /* CodeView.swift in Sources */,
+				84C1830F2486F0E40048F800 /* SkeletonView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
