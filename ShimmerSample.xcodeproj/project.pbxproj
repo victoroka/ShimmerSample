@@ -12,7 +12,23 @@
 		84C182F52486CF8B0048F800 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C182F42486CF8B0048F800 /* ViewController.swift */; };
 		84C182FA2486CF8D0048F800 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84C182F92486CF8D0048F800 /* Assets.xcassets */; };
 		84C182FD2486CF8D0048F800 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84C182FB2486CF8D0048F800 /* LaunchScreen.storyboard */; };
+		84C183062486D8EE0048F800 /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84C183052486D8EE0048F800 /* SnapKit.framework */; };
+		84C183072486D8EE0048F800 /* SnapKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 84C183052486D8EE0048F800 /* SnapKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		84C183082486D8EE0048F800 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				84C183072486D8EE0048F800 /* SnapKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		84C182ED2486CF8B0048F800 /* ShimmerSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShimmerSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -22,6 +38,7 @@
 		84C182F92486CF8D0048F800 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		84C182FC2486CF8D0048F800 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		84C182FE2486CF8D0048F800 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		84C183052486D8EE0048F800 /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84C183062486D8EE0048F800 /* SnapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +58,7 @@
 			children = (
 				84C182EF2486CF8B0048F800 /* ShimmerSample */,
 				84C182EE2486CF8B0048F800 /* Products */,
+				84C183042486D8EE0048F800 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -64,6 +83,14 @@
 			path = ShimmerSample;
 			sourceTree = "<group>";
 		};
+		84C183042486D8EE0048F800 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				84C183052486D8EE0048F800 /* SnapKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,6 +101,8 @@
 				84C182E92486CF8B0048F800 /* Sources */,
 				84C182EA2486CF8B0048F800 /* Frameworks */,
 				84C182EB2486CF8B0048F800 /* Resources */,
+				84C183082486D8EE0048F800 /* Embed Frameworks */,
+				84C183092486D9320048F800 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -128,6 +157,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		84C183092486D9320048F800 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/SnapKit.framework",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		84C182E92486CF8B0048F800 /* Sources */ = {
@@ -274,6 +324,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3NBXKDMT65;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = ShimmerSample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -292,6 +346,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3NBXKDMT65;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = ShimmerSample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
