@@ -85,6 +85,9 @@ final class ViewControllerScreen: UIView {
     private lazy var fetchButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Load Profile", for: .normal)
+        button.tintColor = .white
+        button.backgroundColor = .systemBlue
+        button.layer.cornerRadius = 14
         button.addTarget(self, action: #selector(loadProfile), for: .touchUpInside)
         return button
     }()
@@ -216,8 +219,8 @@ extension ViewControllerScreen: CodeView {
         
         fetchButton.snp.makeConstraints { (make) in
             make.top.equalTo(cardView.snp.bottom).offset(150)
-            make.left.equalToSuperview().offset(50)
-            make.right.equalToSuperview().inset(50)
+            make.left.equalToSuperview().offset(70)
+            make.right.equalToSuperview().inset(70)
             make.height.equalTo(40)
             make.centerX.equalToSuperview()
         }
