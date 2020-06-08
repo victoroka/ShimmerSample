@@ -48,7 +48,7 @@ class SkeletonView: UIView {
      }
      
      func stopAnimating() {
-         self.gradientLayer.removeAllAnimations()
-         self.gradientLayer.removeFromSuperlayer()
+        self.gradientLayer.removeAllAnimations()
+        self.gradientLayer.removeFromSuperlayer()
      }
 }

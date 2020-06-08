@@ -95,17 +95,20 @@ final class ViewControllerScreen: UIView {
     override init(frame: CGRect = .zero) {
         super.init(frame: frame)
         setupView()
-        
         layoutIfNeeded()
+        setupMaskingViews()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setupMaskingViews() {
         maskingViews.append(nameLabelMask)
         maskingViews.append(jobTitleLabelMask)
         maskingViews.append(locationLabelMask)
         maskingViews.append(profileImageViewPlaceholder)
         skeletonView.setMaskingViews(for: maskingViews)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     // MARK: - Button Action

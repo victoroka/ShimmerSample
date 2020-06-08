@@ -19,6 +19,7 @@ final class ViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNeedsStatusBarAppearanceUpdate()
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.refreshScreenComponents), name: UIApplication.willEnterForegroundNotification, object: UIApplication.shared)
     }
     
     override func viewDidLoad() {
@@ -27,5 +28,9 @@ final class ViewController: UIViewController {
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         .darkContent
+    }
+    
+    @objc func refreshScreenComponents() {
+        screen.setupMaskingViews()
     }
 }
